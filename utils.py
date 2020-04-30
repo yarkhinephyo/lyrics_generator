@@ -15,7 +15,7 @@ def validate_input(request):
     genre = request.args.get('genre')
     rhyme_freq = request.args.get('rhyme_freq', type=int)
     max_length = request.args.get('max_length', type=int)
-    num_lines = request.args.get('max_length', type=int)
+    num_lines = request.args.get('num_lines', type=int)
 
     if not genre:
         errs.append('Please select genre')
