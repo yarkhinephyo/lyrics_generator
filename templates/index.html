@@ -1,0 +1,53 @@
+{% extends "parent.html" %}
+
+{% block body %}
+
+<form action="/process_generate" method="GET">
+<table>
+    <tr>
+        <th>
+            Choose genre: 
+        </th>
+        <td>
+            {% for genre in genres %}
+            <input type='radio' name='genre' value='{{genre}}'>{{genre}}
+            {% endfor %}
+        </td>
+    </tr>
+    <tr>
+        <th>
+            Rhyme frequency:
+        </th>
+        <td>
+            <select name='rhyme_freq'>
+                <option value='1'>Every 1 line (No rhyme)</option>
+                <option value='2' selected>Every 2 lines</option>
+                <option value='3'>Every 3 lines</option>
+                <option value='4'>Every 4 lines</option>
+            </select>
+        </td>
+    </tr>
+    <tr>
+        <th>
+            Max length per line: 
+        </th>
+        <td>
+            <input name='max_length' type='number' value=8>
+        </td>
+    </tr>
+    <tr>
+        <th>
+            Number of lines:
+        </th>
+        <td>
+            <input name='num_lines' type='number' value=10>
+        </td>
+    </tr>
+    <tr>
+        <td></td>
+        <td style="text-align:right;"><input type='submit' value='Generate!'></td>
+    </tr>
+</table>
+</form>
+
+{% endblock %}
