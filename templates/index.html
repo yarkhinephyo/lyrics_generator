@@ -1,53 +1,62 @@
 {% extends "parent.html" %}
 
 {% block body %}
-
+<div class="container">
 <form action="/process_generate" method="GET">
-<table>
-    <tr>
-        <th>
-            Choose genre: 
-        </th>
-        <td>
+
+    <div class="form-group row mt-1">
+        <div class="col-sm-2">
+            <label>Choose genre:</label>
+        </div>
+        <div class="col-sm-4 form-inline">
             {% for genre in genres %}
-            <input type='radio' name='genre' value='{{genre}}'>{{genre}}
+            <div class="radio col-sm-1">
+                <input type='radio' name='genre' value='{{genre}}' id='{{genre}}'>
+            </div>
+            <div class="col-sm-5">
+                <label for='{{genre}}'>{{genre}}</label>
+            </div>
             {% endfor %}
-        </td>
-    </tr>
-    <tr>
-        <th>
-            Rhyme frequency:
-        </th>
-        <td>
-            <select name='rhyme_freq'>
+        </div>
+    </div>
+
+    <div class="form-group row mt-1">
+        <div class="col-sm-2">
+            <label>Rhyme Frequency:</label>
+        </div>
+        <div class="col-sm-4">
+            <select class="form-control" name='rhyme_freq'>
                 <option value='1'>Every 1 line (No rhyme)</option>
                 <option value='2'>Every 2 lines</option>
                 <option value='3' selected>Every 3 lines</option>
                 <option value='4'>Every 4 lines</option>
             </select>
-        </td>
-    </tr>
-    <tr>
-        <th>
-            Max length per line: 
-        </th>
-        <td>
-            <input name='max_length' type='number' value=8>
-        </td>
-    </tr>
-    <tr>
-        <th>
-            Number of lines:
-        </th>
-        <td>
-            <input name='num_lines' type='number' value=9>
-        </td>
-    </tr>
-    <tr>
-        <td></td>
-        <td style="text-align:right;"><input type='submit' value='Generate!'></td>
-    </tr>
-</table>
+        </div>
+    </div>
+
+    <div class="form-group row mt-1">
+        <div class="col-sm-2">
+            <label>Max length per line:</label>
+        </div>
+        <div class="col-sm-4">
+            <input class="form-control" name='max_length' type='number' value=8>
+        </div>
+    </div>
+
+    <div class="form-group row mt-1">
+        <div class="col-sm-2">
+            <label>Number of lines:</label>
+        </div>
+        <div class="col-sm-4">
+            <input class="form-control" name='num_lines' type='number' value=9>
+        </div>
+    </div>
+
+    <div>
+        <input class="btn btn-secondary" type='submit' value='Generate!'>
+    </div>
+
 </form>
+</div>
 
 {% endblock %}

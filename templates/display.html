@@ -1,8 +1,17 @@
 {% extends "index.html" %}
 
 {% block body %}
-<textarea style='width: 600px;height: 300px;'>
-{{song}}
-</textarea>
-<p><a href='{{url_for("index")}}'>Return</a></p>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-6">
+                <textarea class='form-control' style='width: 600px;height: 300px;' spellcheck="false">{{song}}</textarea>
+            </div>  
+        </div>
+        <div class="row row-m-t">
+            <div class="col-sm-6">
+                <a class="btn btn-primary" role="button" href="{{url_for("index")}}">Return</a>
+            </div>
+        </div>
+    </div>
+
 {% endblock %}

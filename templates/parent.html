@@ -3,28 +3,43 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lyrics Generator</title>
+    <title>Lyrics Machine</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <style>
-        th{
-            text-align:right;
+        .row-m-t{
+        margin-top : 20px
         }
     </style>
 </head>
 <body>
-    <h2>Lyrics generator</h2>
-    <p>Bigram/ unigram generation with dataset from 
-        <a href="https://www.kaggle.com/gyani95/380000-lyrics-from-metrolyrics/data">Kaggle</a>
-    </p>
+    <div class="container">
+        <div class="row justify-content-ms-center">
+            <div class="col-sm-6">
+                <h2>Lyrics Machine</h2>
+            </div>
+        </div>
+        <div class="row justify-content-ms-center">
+            <div class="col-sm-6">
+                <p>Bigram/ unigram generation with dataset from 
+                    <a href="https://www.kaggle.com/gyani95/380000-lyrics-from-metrolyrics/data">Kaggle</a>
+                </p>
+            </div>
+        </div>
+    </div>
+    
     <hr>
     
     {% block body %}{% endblock %}
 
     {% if errs != None %}
-    <ul style='color:red;'>
-        {% for err in errs %}
-        <li>{{err}}</li>
-        {% endfor %}
-    </ul>
+    <div class="container">
+        <ul class="list-group list-unstyled">
+            {% for err in errs %}
+            <li class="list-group-item-danger">{{err}}</li>
+            {% endfor %}
+        </ul>
+    </div>
     {% endif %}
+
 </body>
 </html>
