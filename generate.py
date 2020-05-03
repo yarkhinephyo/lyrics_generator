@@ -48,7 +48,7 @@ def generate_one_line(reverse_dict_1, reverse_dict_2, endword, maxlength):
     word_one = tmp1
     text_list.insert(0, word_two)
   
-  return " ".join(text_list)
+  return (" ".join(text_list)).capitalize()
 
 
 def get_reverse_dicts(genre):
