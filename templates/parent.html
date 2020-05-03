@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <style>
         .row-m-t{
-        margin-top : 20px
+            margin-top : 20px
         }
     </style>
 </head>
@@ -25,19 +25,20 @@
                 </p>
             </div>
         </div>
+        <hr>
     </div>
-    
-    <hr>
-    
+
     {% block body %}{% endblock %}
 
     {% if errs != None %}
     <div class="container">
-        <ul class="list-group list-unstyled">
-            {% for err in errs %}
-            <li class="list-group-item-danger">{{err}}</li>
-            {% endfor %}
-        </ul>
+        <div class="row row-m-t">
+            <ul class="list-group list-unstyled col-sm-6">
+                {% for err in errs %}
+                <li class="list-group-item-danger">{{err}}</li>
+                {% endfor %}
+            </ul>
+        </div>
     </div>
     {% endif %}
 
