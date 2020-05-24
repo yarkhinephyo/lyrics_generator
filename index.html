@@ -1,0 +1,118 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lyrics Machine</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <style>
+        .row-m-t{
+            margin-top : 20px
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="row justify-content-ms-center">
+            <div class="col-sm-6">
+                <h2>Lyrics Machine</h2>
+            </div>
+        </div>
+        <div class="row justify-content-ms-center">
+            <div class="col-sm-6">
+                <p>Bigram/ unigram generation with dataset from 
+                    <a href="https://www.kaggle.com/gyani95/380000-lyrics-from-metrolyrics/data">Kaggle</a>
+                </p>
+            </div>
+        </div>
+        <hr>
+    </div>
+
+    <div class="container">
+
+        <div class="form-group row row-m-t">
+            <div class="col-sm-2">
+                <label>Rhyme Frequency:</label>
+            </div>
+            <div class="col-sm-4">
+                <select class="form-control" id='rhyme_freq'>
+                    <option value='1'>Every 1 line (No rhyme)</option>
+                    <option value='2'>Every 2 lines</option>
+                    <option value='3'>Every 3 lines</option>
+                    <option value='4' selected>Every 4 lines</option>
+                    <option value='5'>Every 5 lines</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="form-group row row-m-t">
+            <div class="col-sm-2">
+                <label>Max length per line:</label>
+            </div>
+            <div class="col-sm-4">
+                <input class="form-control" id='max_length' type='number' value=8>
+            </div>
+        </div>
+
+        <div class="form-group row row-m-t">
+            <div class="col-sm-2">
+                <label>Number of lines:</label>
+            </div>
+            <div class="col-sm-4">
+                <input class="form-control" id='num_lines' type='number' value=12>
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <div class="col-sm-2">
+                <label>Choose genre:</label>
+            </div>
+            <div class="col-sm-4 form-inline">
+                <div class="col-sm-6">
+                    <button type='button' class='btn btn-secondary' id='Hip-Hop' onclick='get_generated_song("Hip-Hop")'>Hip-Hop</button>
+                </div>
+                <!-- <div class="col-sm-6">
+                    <button type='button' class='btn btn-secondary' id='Metal' onclick='get_generated_song("Metal")'>Metal</button>
+                </div> -->
+            </div>
+        </div>
+
+        <div class="row" id='display' style='visibility: hidden;'>
+            <div class="col-sm-6">
+                <textarea class='form-control' style='width:100%; height:300px;' spellcheck="false"></textarea>
+            </div>  
+        </div>
+
+    </div>
+
+    <script type="text/javascript">
+        const API_URL = 'https://ir4jn0gpgi.execute-api.ap-southeast-1.amazonaws.com/initial/default';
+        async function get_generated_song(input_genre){
+            let url = new URL(API_URL);
+            let params = {
+                n: $('#rhyme_freq').val(),
+                maxlength: $('#max_length').val(),
+                numOfLines: $('#num_lines').val(),
+                genre: input_genre
+            };
+            url.search = new URLSearchParams(params).toString();
+
+            const response = await fetch(url, {
+                method: 'GET', 
+                mode:'cors',
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            });
+            const song = await response.json();
+
+            $('#display').css('visibility', 'visible');
+            $('#display textarea').val(song['song']);
+        } 
+    
+    </script>
+
+</body>
+</html>
