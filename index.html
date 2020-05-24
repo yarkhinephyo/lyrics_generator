@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lyrics Machine</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <style>
         .row-m-t{
@@ -71,10 +71,11 @@
             </div>
             <div class="col-sm-4 form-inline">
                 <div class="col-sm-6">
-                    <button type='button' class='btn btn-secondary' id='Hip-Hop' onclick='get_generated_song("Hip-Hop")'>Hip-Hop</button>
+                    <button type='button' class='btn btn-outline-success' id='Hip-Hop' onclick='get_generated_song("Hip-Hop")'>Hip-Hop</button>
+                    <span class="spinner-border text-success" id="spinner" style="visibility: hidden;"></span>
                 </div>
                 <!-- <div class="col-sm-6">
-                    <button type='button' class='btn btn-secondary' id='Metal' onclick='get_generated_song("Metal")'>Metal</button>
+                    <button type='button' class='btn btn-outline-success' id='Metal' onclick='get_generated_song("Metal")'>Metal</button>
                 </div> -->
             </div>
         </div>
@@ -89,7 +90,12 @@
 
     <script type="text/javascript">
         const API_URL = 'https://ir4jn0gpgi.execute-api.ap-southeast-1.amazonaws.com/initial/default';
+        // const API_URL = 'http://localhost:5000/process_generate_json';
         async function get_generated_song(input_genre){
+            
+            $('#Hip-Hop').css('visibility', 'hidden');
+            $('#spinner').css('visibility', 'visible');
+
             let url = new URL(API_URL);
             let params = {
                 n: $('#rhyme_freq').val(),
@@ -109,6 +115,8 @@
             const song = await response.json();
 
             $('#display').css('visibility', 'visible');
+            $('#spinner').css('visibility', 'hidden');
+            $('#Hip-Hop').css('visibility', 'visible');
             $('#display textarea').val(song['song']);
         } 
     
